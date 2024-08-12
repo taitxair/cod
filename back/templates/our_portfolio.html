@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block title %} Our Portfolio{% endblock title %} 
+
+{% block main %}
+<main>
+  <div class="cover">
+    <div class="container">
+      <h1 class="covers_h1">Our Portfolio</h1>
+      <h4><span class="covers_span">Home/</span>Our Portfolio</h4>
+    </div>
+  </div>
+  <div class="container">
+    <div class="our_portfolio_image">
+      {% for portfolio in page_obj %}
+    <div class="portfolio-item">
+        <img src="{{ portfolio.portfolio_image.url }}" alt="">
+    </div>
+      {% endfor %}
+    </div>
+    <div class="our_portfolio_btn">
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; <i class="fa-solid fa-backward-fast"></i></a>
+                <a href="?page={{ page_obj.previous_page_number }}"><i class="fa-solid fa-arrow-left"></i></a>
+            {% endif %}
+    
+            <span class="current">
+                {{ page_obj.number }} -- {{ page_obj.paginator.num_pages }}
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><i class="fa-solid fa-arrow-right"></i></a>
+                <a href="?page={{ page_obj.paginator.num_pages }}"><i class="fa-solid fa-forward-fast"></i> &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+      <button>Load More</button>
+    </div>
+  </div>
+  
+</div>
+</main>
+{% endblock main %}
